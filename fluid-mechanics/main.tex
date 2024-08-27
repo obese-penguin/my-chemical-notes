@@ -1,0 +1,117 @@
+\documentclass[12pt]{report}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{datetime, xcolor}
+\usepackage{amsthm, thmtools, amsfonts, mathtools, amsmath}
+
+\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{axiom}{Axiom}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\title{Fluid Mechanics}
+\author{Riddhiman}
+\date{\monthyeardate\today}
+
+\let\oldvec = \vec
+\renewcommand{\vec}[1]{\oldvec{\mathbf{#1}}}
+
+\begin{document}
+
+\maketitle
+
+\chapter{Fundamental Concepts}%
+\label{cha:Fundamental Concepts}
+
+\section{Basic Concepts}%
+\label{sec:Basic Concepts}
+
+\section{Continuum Hypothesis}%
+\label{sec:Continuum Hypothesis}
+
+
+\begin{itemize}
+    \item \begin{align*}
+    \text{Knudsen Number } (\text{kn}) = \frac{\text{Mean free path } (\lambda) }{\text{Chateristic Length} (\text{L})}
+\end{align*}
+    Continuum hypothesis won't be valid for Kn $ \geq $ 0.01. 
+    \item Density $ \rho = \frac{\text{mass}}{\text{volume}} $
+    \item Specific volume $ \nu = \frac{1}{\rho} $
+    \item Specific weight $ \gamma = \frac{mg}{V} = \rho g $ 
+    \item Specific Gravity $ \text{SG} = \frac{\rho}{\rho_{\text{water @ } 227K}} $
+\end{itemize}
+
+\section{Forces on a fluid particle}%
+\label{sec:Forces on a fluid particle}
+
+\begin{itemize}
+    \item Body forces
+    \item Surface forces
+    \item Normal stress, 
+        \begin{align*}
+            \sigma_{n} = \lim_{\delta A_{n} \rightarrow 0} \frac{\delta F_{n}}{\delta A_{n}}
+        \end{align*}
+    \item Shear stress, 
+        \begin{align*}
+            \tau_{n} = \lim_{\delta A_{n} \rightarrow 0} \frac{\delta F_{t}}{\delta A_{n}}
+        \end{align*}
+    \item Shear tensor,
+       \begin{align*}
+          \begin{bmatrix}
+              \sigma_{xx} & \tau_{xy} & \tau_{xz} \\ 
+              \tau_{yx} & \sigma_{yy} & \tau_{yz} \\ 
+              \tau_{zx} & \tau_{zy} & \sigma_{zz} \\ 
+          \end{bmatrix}
+       \end{align*}
+\end{itemize}
+
+\section{Viscosity}%
+\label{sec:Viscosity}
+
+\begin{flalign*}
+    && \tau_{yx} &= \lim_{\delta A_{y} \rightarrow 0 } \frac{\delta F_{x}}{\delta A_{y}} = \frac{dF_{x}}{dA_{y}} &\\
+    \text{And, } &&\text{DR} &= \lim_{\delta t \rightarrow 0} \frac{\delta \alpha}{\delta t} = \frac{d \alpha}{dt} &\\
+    \text{Since, } && \delta l = \delta \alpha  \ \delta y &\text{ and } \delta l = \delta u \  \delta t &\\
+    \text{we get } && \text{DR} &= \frac{du}{dy}
+\end{flalign*}
+
+For Newtonian fluids, 
+\[ \tau_{yx} = \mu \frac{du}{dy} \qquad \mu \rightarrow \text{Viscosity} \]
+
+\begin{itemize}
+    \item  Unit: $ \frac{\text{N s}}{\text{m}^{2}} $
+    \item Kinematic viscosity: $ \nu = \frac{\mu}{\rho} $. Unit of this: $ \frac{\text{m}^{2}}{\text{s}} $ 
+    \item For non-Newtonian fluids: $ \tau_{yx} = k \left( \frac{du}{dy} \right)^{n} = k \lvert \frac{du}{dy} \rvert^{n-1} \left( \frac{du}{dy} \right) = \eta \frac{du}{dy} $
+    \item $ k \rightarrow \text{consistency index} $, $ n \rightarrow \text{flow behavior index} $, $ \eta \rightarrow \text{apparent velocity} $.  
+\end{itemize}
+
+\section{Description and classification of fluid motion}%
+\label{sec:Description and classification of fluid motion}
+
+\subsection{Steady vs unsteady}%
+\label{sub:Steady vs unsteady}
+
+\begin{equation*}
+    \frac{\partial \rho}{\partial t} = 0 \implies \rho = \rho(x, y, z) \qquad
+    \frac{\partial \vec{V}}{\partial t} = 0 \implies \vec{V} = \vec{V}(x, y, z) \qquad
+    \frac{\partial p}{\partial t} = 0 \implies p = p(x, y, z)
+\end{equation*}
+
+\subsection{Uniform vs non-uniform}%
+\label{sub:Uniform vs non-uniform}
+
+\begin{equation*}
+    \left.\frac{\partial \vec{V}}{\partial x} \right\rvert_{t = \text{const}} = 0
+\end{equation*}
+
+where $ x $ is in direction of flow. 
+
+
+\end{document}
+
