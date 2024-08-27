@@ -2,7 +2,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage[a4paper, total={6in, 10in}]{geometry}
 \usepackage{datetime, xcolor}
-\usepackage{amsthm, thmtools, amsfonts, mathtools, amsmath}
+\usepackage{amsthm, thmtools, amsfonts, mathtools, amsmath, xfrac, bm}
 
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
@@ -21,6 +21,7 @@
 
 \let\oldvec = \vec
 \renewcommand{\vec}[1]{\oldvec{\mathbf{#1}}}
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
 
 \begin{document}
 
@@ -112,6 +113,97 @@ For Newtonian fluids,
 
 where $ x $ is in direction of flow. 
 
+\subsection{Compressible vs incompressible}%
+\label{sub:Compressible vs incompressible}
+
+\begin{itemize}
+    \item $ \rho = \text{constant} $.
+    \item At high pressures, \[ \text{Bulk compressibility modulus } E_{v} = \frac{dp}{\left(\sfrac{d \rho}{\rho}\right)} \]
+    \item Water hammer, cavitation
+    \item Gases are taken to be incompressible if Mach number (Ma) $ \leq 0.3 $. \[ \text{Mach number } Ma = \frac{\text{flow speed, }V}{\text{local speed of sound, }c} \]
+    \item Compressible $ \rightarrow $ Supersonic ($ Ma > 1 $) or subsonic ($ Ma < 1 $).
+\end{itemize}
+
+\subsection{Inviscid vs viscid flows}%
+\label{sub:Inviscid vs viscid flows}
+
+\begin{itemize}
+    \item Inviscid flows $ \rightarrow $ zero viscosity (frictionless flow).
+    \item Viscid flows $ \rightarrow $ finite viscosity. 
+\end{itemize}
+
+\subsection{Laminar vs turbulent}%
+\label{sub:Laminar vs turbulent}
+
+\begin{itemize}
+    \item Laminar $ \rightarrow $ smooth layers
+    \item Turbulent $ \rightarrow $ fluid particles randomly mix. 
+    \item \[ \text{Reynold's Number } Re = \frac{\text{Inertial force}}{\text{Viscous force}} = \frac{\rho \bar{V} L}{\mu} \]
+    \item Laminar $ \rightarrow Re \leq 2100 $. Turbulent $ \rightarrow Re \geq 4000 $.
+\end{itemize}
+
+\section{Surface tension}%
+\label{sec:Surface tension}
+
+\begin{itemize}
+    \item Pressure difference in a droplet: 
+        \begin{flalign*}
+            &&\text{Tensile force due to surface tension }  &= \sigma \pi d &\\
+            &&\text{Pressure force on the area }  &= (P_{i} - P_{o}) \frac{\pi d^{2}}{4} &\\
+            &&\text{Force balance: } \sigma \pi d &= (P_{i} - P_{o}) \frac{\pi d^{2}}{4} &\\
+            \implies && \Aboxed{P_{i} &= P_{o} + \frac{4\sigma}{d}} 
+        \end{flalign*}
+    \item  $ \text{For a soap bubble: } P_{i} = P_{o} + \frac{8 \sigma}{d} $
+    \item Capillary effect force balance: 
+        \begin{flalign*}
+            &&\text{Weight of fluid} &= (\text{Area} \times \text{height}) \rho g &\\
+            &&\text{Verticle component of surface tension} &= \sigma \pi d \cos{\theta} &\\
+            \implies && \frac{\pi d^{2} h}{4} \rho g &= \sigma \pi d \cos{\theta} &\\
+            \implies && \Aboxed{h &= \frac{4 \sigma \cos{\theta}}{\rho g d}}
+        \end{flalign*}
+        
+\end{itemize}
+
+\chapter{Fluid statics}
+
+\section{Pressure formula}%
+\label{sec:Pressure formula}
+
+Imagine a small cube of fluid with sides $ dx, dy, dz $.  Assume this fluid is stationary relative to the stationary rectangular coordinates. Let $ \vec{O} $ denote the center of the cube and the pressure there be $ P( \vec{O} ) $. We want to do a force balance on this cube. There are two types of forces acting on this: Body and surface forces. The body force is just gravity: 
+
+\[ \vec{F}_{B} = \vec{g}\ dm = \rho \vec{g}\ dV = \rho \vec{g}\  dx\ dy\ dz \]
+
+For surface forces we need pressure difference. For pressure across the y direction, let on the face on the left we write the taylor series of $ p $ centered around $ \vec{O} $. Thus, 
+
+\begin{flalign*}
+    && p_{L} &= p + \frac{\partial p}{\partial y} \left(y_{L} - y\right) &\\
+    \implies && &= p + \frac{\partial p}{\partial y} \left( - \frac{dy}{2} \right) &\\
+    \implies && &= p - \frac{\partial p}{\partial y} \frac{dy}{2}
+\end{flalign*}
+
+Similarly, 
+
+\begin{flalign*}
+    && p_{R} &= p + \frac{\partial p}{\partial y} \left(y_{R} - y\right) &\\
+    \implies && &= p + \frac{\partial p}{\partial y}  \frac{dy}{2} 
+\end{flalign*}
+
+Thus, force on the left face is $ \left(p_{L}\ dx\ dz \uvec{\j}\right) = \left( p - \frac{\partial p}{\partial y} \frac{dy}{2} \right)\ dx\ dz ( \uvec{\j} ) $ and that on the right face is $ \left( p_{R} dx dz \left(- \uvec{\j}\right) \right) = \left( p + \frac{\partial p}{\partial y} \frac{dy}{2} \right)\ dx\ dz \left( - \uvec{\j} \right) $. Force different in this direction gives us: $ \left( p_{R} \left( - \uvec{\j} \right) - p_{L} \left( \uvec{\j} \right) \right)\ dx\ dz = - \left( \frac{\partial p}{\partial y}\ dx\ dy\ dz \right) $ Doing the same for other directions we get, 
+
+\begin{flalign*}
+    && d\vec{F}_{S} &= - \left( \frac{\partial p}{\partial x} \uvec{\i} + \frac{\partial p}{\partial y} \uvec{\j} + \frac{\partial p}{\partial z} \uvec{k} \right)\ dx\ dy\ dz &\\ 
+    && &= - \nabla p\ dx\ dy\ dz
+\end{flalign*}
+
+Ultimately: 
+
+\begin{flalign*}
+    && \vec{F} &= d\vec{F}_{B} + d\vec{F}_{S} &\\
+    && &= \left( -\nabla p + \rho \vec{g} \right) dV
+\end{flalign*}
+
+For a static fluid, $ \vec{F} = m\vec{a} = 0 $. Thus, we simplify the previous equation. Since $ \vec{g} $ points in the $ - \uvec{\j} $ direction, all terms cancel but
+\[ \frac{dp}{dz} = - \rho g \]
 
 \end{document}
 
